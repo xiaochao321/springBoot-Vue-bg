@@ -3,12 +3,15 @@ package com.yuanjun.mybatis.controller;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.yuanjun.mybatis.entity.CustInfo;
+import com.yuanjun.mybatis.entity.RestResult;
 import com.yuanjun.mybatis.entity.User;
 import com.yuanjun.mybatis.service.CustInfoService;
 import com.yuanjun.mybatis.service.UserService;
+import com.yuanjun.mybatis.util.ResultGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +24,8 @@ public class CustInfoController {
 
     @Autowired
     private CustInfoService custInfoService;
+	@Autowired
+	private ResultGenerator resultGenerator;
 
     @ResponseBody
     @RequestMapping("/save")
@@ -56,13 +61,10 @@ public class CustInfoController {
      * 保存操作
      * @return
      */
-    @RequestMapping("saveCust")
-    public String saveUser(@RequestBody CustInfo custInfo){
-        //CustInfo custInfo = new CustInfo();
-        //custInfo.setName("小超");
-        //custInfo.setMobile(13570006694L);
+	@RequestMapping(value = "/saveCust" ,method= RequestMethod.POST)
+    public RestResult saveUser(@RequestBody CustInfo custInfo){
 		custInfoService.insert(custInfo);
-        return "保存成功";
+        return  resultGenerator.getSuccessResult("保存成功",custInfo);
     }
 
     /**
