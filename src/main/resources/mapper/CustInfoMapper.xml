@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yuanjun.mybatis.mapper.CustInfoMapper" >
 
+    <resultMap id="BaseResultMap" type="com.yuanjun.mybatis.entity.CustInfo">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name"/>
+        <result column="mobile" property="mobile"/>
+        <result column="address" property="address"/>
+        <result column="email" property="email"/>
+    </resultMap>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id"
             parameterType="com.yuanjun.mybatis.entity.CustInfo">
         insert into cust_info (
@@ -23,4 +30,12 @@
     <select id="findByName" parameterType="java.lang.String" resultType="com.yuanjun.mybatis.entity.CustInfo">
         select id,name,mobile,email,address from cust_info where name =#{name}
     </select>
+
+    <select id="findCustInfos"  resultMap="BaseResultMap">
+        select *from cust_info  c where 1=1
+        <if test="queryModel.name != null" >
+            and c.name like "%"#{queryModel.name}"%"
+        </if>
+    </select>
+
 </mapper>

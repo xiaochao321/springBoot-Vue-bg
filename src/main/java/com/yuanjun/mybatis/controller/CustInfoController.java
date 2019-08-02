@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.yuanjun.mybatis.entity.CustInfo;
 import com.yuanjun.mybatis.entity.RestResult;
 import com.yuanjun.mybatis.entity.User;
+import com.yuanjun.mybatis.model.CustInfoQueryModel;
 import com.yuanjun.mybatis.service.CustInfoService;
 import com.yuanjun.mybatis.service.UserService;
 import com.yuanjun.mybatis.util.ResultGenerator;
@@ -42,6 +43,14 @@ public class CustInfoController {
         return custInfoService.findByName("yuanjun");
     }
 
+	@RequestMapping(value = "/getCustInfos" ,method= RequestMethod.POST)
+	public RestResult getCustInfos(@RequestBody CustInfoQueryModel queryModel){
+		System.out.println(queryModel.getName());
+		List<CustInfo> custInfos = custInfoService.findCustInfos(queryModel);
+		System.out.println(custInfos);
+    	return resultGenerator.getSuccessResult("成功获取cust列表",custInfos);
+	}
+
     /**
      * 条件的拼接构造器
      * 1.new EntityWrapper()
@@ -64,7 +73,7 @@ public class CustInfoController {
 	@RequestMapping(value = "/saveCust" ,method= RequestMethod.POST)
     public RestResult saveUser(@RequestBody CustInfo custInfo){
 		custInfoService.insert(custInfo);
-        return  resultGenerator.getSuccessResult("保存成功",custInfo);
+		return  resultGenerator.getSuccessResult("保存成功",custInfo);
     }
 
     /**
