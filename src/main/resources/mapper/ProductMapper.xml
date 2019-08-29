@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuanjun.mybatis.mapper.ProductMapper" >
+
+    <resultMap id="BaseResultMap" type="com.yuanjun.mybatis.entity.Product">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name"/>
+        <result column="describe" property="describe"/>
+        <result column="imgurl" property="imgurl"/>
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.yuanjun.mybatis.entity.Product">
+        insert into product (
+        `id`,
+        `name`,
+        `describe`,
+        `imgurl`
+        )
+        values (
+        #{id,jdbcType=BIGINT},
+        #{name,jdbcType=VARCHAR},
+        #{describe,jdbcType=VARCHAR},
+        #{imgurl,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <select id="findByName" parameterType="java.lang.String" resultType="com.yuanjun.mybatis.entity.Product">
+        select id,name,mobile,describe,imgurl from product where name =#{name}
+    </select>
+
+    <select id="findProducts"  resultMap="BaseResultMap">
+        select *from product  c where 1=1
+        <if test="queryModel.name != null" >
+            and c.name like "%"#{queryModel.name}"%"
+        </if>
+    </select>
+
+</mapper>
