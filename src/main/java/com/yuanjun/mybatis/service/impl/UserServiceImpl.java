@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
         PasswordHelper.encryptPassword(user);
         int index = new Random().nextInt(6) + 1;
-        String avatar = "/static/user/user_" + index + ".png";
+        String avatar = "/user/user_" + index + ".png";
 
         user.setAvatar(avatar);
         return userRepository.save(user).getId();
