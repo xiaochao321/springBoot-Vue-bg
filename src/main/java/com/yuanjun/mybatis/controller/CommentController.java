@@ -7,6 +7,7 @@ import com.yuanjun.mybatis.common.annotation.LogAnnotation;
 import com.yuanjun.mybatis.common.constant.ResultCode;
 import com.yuanjun.mybatis.common.result.Result;
 import com.yuanjun.mybatis.entity.Comment;
+import com.yuanjun.mybatis.entity.Tag;
 import com.yuanjun.mybatis.entity.User;
 import com.yuanjun.mybatis.service.CommentService;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;

@@ -17,6 +17,10 @@ public interface TagService {
 
     Tag getTagById(Integer id);
 
+    Tag getTagByFirstId(Integer id);
+
+	Tag getTagBySecondId(Integer id);
+
     Integer saveTag(Tag tag);
 
     Integer updateTag(Tag tag);

@@ -52,6 +52,8 @@ public class TagController {
     public Result listCategorysDetail() {
         List<TagVO> categorys = tagService.findAllDetail();
 
+		Tag tag1 = tagService.getTagByFirstId(1);
+		Tag tag2 = tagService.getTagByFirstId(1);
         return Result.success(categorys);
     }
 
@@ -76,6 +78,9 @@ public class TagController {
         }
 
         Tag tag = tagService.getTagById(id);
+
+        Tag tag1 = tagService.getTagByFirstId(1);
+		Tag tag2 = tagService.getTagByFirstId(1);
 
         r.setResultCode(ResultCode.SUCCESS);
         r.setData(tag);

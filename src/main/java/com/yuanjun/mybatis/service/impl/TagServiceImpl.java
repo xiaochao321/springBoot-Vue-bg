@@ -3,6 +3,8 @@ package com.yuanjun.mybatis.service.impl;
 import java.util.List;
 
 
+import com.yuanjun.mybatis.annotation.CurDataSource;
+import com.yuanjun.mybatis.configuration.DataSourceNames;
 import com.yuanjun.mybatis.entity.Tag;
 import com.yuanjun.mybatis.repository.TagRepository;
 import com.yuanjun.mybatis.service.TagService;
@@ -34,8 +36,17 @@ public class TagServiceImpl implements TagService {
     public Tag getTagById(Integer id) {
         return tagRepository.getOne(id);
     }
+	@Override
+	public Tag getTagByFirstId(Integer id) {
+		return tagRepository.getOne(id);
+	}
+	@CurDataSource(name= DataSourceNames.SECOND)
+	@Override
+	public Tag getTagBySecondId(Integer id) {
+		return tagRepository.getOne(id);
+	}
 
-    @Override
+	@Override
     @Transactional
     public Integer saveTag(Tag tag) {
 
